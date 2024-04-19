@@ -186,10 +186,9 @@
     const isLoggedIn = localStorage.getItem('isLoggedIn');
     if (!isLoggedIn || isLoggedIn !== 'true') {
         // Si el usuario no ha iniciado sesión, redirigir a la página de inicio de sesión
-        window.location.href = 'index.html';
+        window.location.replace('index.html');
     } else {
         // Si el usuario ha iniciado sesión, se permite acceder a la página de convocatoria
-        // Puedes agregar cualquier otra lógica necesaria aquí
         const urlParams = new URLSearchParams(window.location.search);
         const user = urlParams.get('user');
         if (user === 'admin') {
