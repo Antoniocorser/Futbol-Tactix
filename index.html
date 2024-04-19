@@ -105,25 +105,26 @@
 </div>
 
 <script>
-   function iniciarSesion() {
-        var username = document.getElementById('username').value;
-        var password = document.getElementById('password').value;
-        var redirectUrl = '';
+    window.location.hash = 'Inicio de sesión';
+    function iniciarSesion() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var redirectUrl = '';
 
-        // Verificar las credenciales de inicio de sesión
-        if (username === 'usuarioPadre' && password === 'contraseñaPadre') {
-        localStorage.setItem('isLoggedIn', 'true');
-        redirectUrl = 'convocatoria.html?user=usuario';
-        } else if (username === 'admin' && password === 'admin'){
+            // Verificar las credenciales de inicio de sesión
+            if (username === 'usuarioPadre' && password === 'contraseñaPadre') {
             localStorage.setItem('isLoggedIn', 'true');
-            redirectUrl = 'convocatoria.html?user=admin';
-        } else {
-            document.getElementById('error-message').style.display = 'block';
+            redirectUrl = 'convocatoria.html?user=usuario';
+            } else if (username === 'admin' && password === 'admin'){
+                localStorage.setItem('isLoggedIn', 'true');
+                redirectUrl = 'convocatoria.html?user=admin';
+            } else {
+                document.getElementById('error-message').style.display = 'block';
+            }
+            if (redirectUrl) {
+                window.location.href = redirectUrl;
+            }
         }
-        if (redirectUrl) {
-            window.location.href = redirectUrl;
-        }
-    }
 </script>
 </body>
 </html>

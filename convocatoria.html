@@ -172,6 +172,8 @@
 </a>
 
 <script>
+     window.location.hash = 'convocatoria';
+
     function toggleImage(img) {
         const allImages = img.parentNode.querySelectorAll('.player-img');
         allImages.forEach(image => {
@@ -193,7 +195,6 @@
     } else {
         console.log('Usuario autenticado, permitiendo acceso a la convocatoria');
         // Si el usuario ha iniciado sesión, se permite acceder a la página de convocatoria
-        // Puedes agregar cualquier otra lógica necesaria aquí
         const urlParams = new URLSearchParams(window.location.search);
         const user = urlParams.get('user');
         if (user === 'admin') {
