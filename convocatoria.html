@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convocatoria</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+        position: relative; /* Añadido para que el contenedor sea relativo */
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        position: relative;
+    }
+
+    h2 {
+        color: #333;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: center;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    .player-img {
+        max-width: 50px;
+        max-height: 50px;
+        cursor: pointer;
+        display: block;
+        margin-bottom: 5px;
+        border-radius: 5px;
+        transition: transform 0.3s ease;
+    }
+
+    .player-img:hover {
+        transform: scale(1.1);
+    }
+
+    @media only screen and (max-width: 600px) {
+        .container {
+            padding: 10px;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        table {
+            font-size: 14px;
+        }
+
+        th, td {
+            padding: 8px;
+        }
+
+        .player-img {
+            max-width: 40px;
+            max-height: 40px;
+        }
+    }
+
+    /* Estilo para el botón de WhatsApp */
+    #whatsapp-icon {
+        display: none;
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+    
+    #whatsapp-icon img {
+        width: 50px; /* Tamaño del icono */
+        height: auto;
+        border-radius: 50%;
+        border: 1px solid #25d366; /* Color del borde */
+        background-color: #25d366; /* Color de fondo */
+        padding: 5px;
+        transition: transform 0.3s ease;
+    }
+
+    #whatsapp-icon img:hover {
+        transform: scale(1.1);
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Información del Partido</h2>
+    <img src="imagenes/ubl.png" alt="Escudo" style="max-width: 100px; margin: 0 auto 20px; display: block;">
+    <p><strong>Fecha:</strong> 18 de abril de 2024</p>
+    <p><strong>Hora:</strong> 19:00</p>
+    <p><strong>Hora de Quedada:</strong> 17:30</p>
+    <p><strong>Lugar de Partido:</strong> Estadio Municipal</p>
+    <p><strong>Equipación:</strong> Camiseta Roja, Pantalón Azul</p>
+
+    <h2>Tabla de Jugadores</h2>
+
+    <table>
+        <tr>
+            <th>Jugador</th>
+            <th>Dorsal</th>
+            <th>Convocado</th>
+        </tr>
+        <!-- Script para generar filas de tabla -->
+        <script>
+            const jugadores = [
+            { nombre: "Lionel Messi", dorsal: 10, imagenes: ["verde.jpg", "rojo.jpg"] },
+            { nombre: "Cristiano Ronaldo", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
+            { nombre: "Cristiano Ronaldo", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
+            { nombre: "Cristiano Ronaldo", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
+            { nombre: "Cristiano Ronaldo", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
+            { nombre: "Cristiano Ronaldo", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
+            { nombre: "Cristiano Ronaldo", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
+            { nombre: "Cristiano Ronaldo", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
+            { nombre: "Cristiano Ronaldo", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
+            { nombre: "Cristiano Ronaldo", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
+            { nombre: "Cristiano Ronaldo", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
+            { nombre: "Cristiano Ronaldo", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
+            { nombre: "Cristiano Ronaldo", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
+            { nombre: "Cristiano Ronaldo", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
+            { nombre: "Cristiano Ronaldo", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
+            { nombre: "Cristiano Ronaldo", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
+            { nombre: "Cristiano Ronaldo", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
+            { nombre: "Cristiano Ronaldo", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
+            { nombre: "Cristiano Ronaldo", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
+            ];
+
+            jugadores.forEach(jugador => {
+                document.write(`
+                    <tr>
+                        <td>${jugador.nombre}</td>
+                        <td>${jugador.dorsal}</td>
+                        <td>
+                            <img class="player-img" src="imagenes/${jugador.imagenes[0]}" alt="Imagen 1" onclick="toggleImage(this)">
+                            <img class="player-img" src="imagenes/${jugador.imagenes[1]}" alt="Imagen 2" onclick="toggleImage(this)">
+                        </td>
+                    </tr>
+                `);
+            });
+        </script>
+        <!-- Fin del script -->
+    </table>
+</div>
+
+<!-- Botón de WhatsApp -->
+<a href="https://api.whatsapp.com/send?text=Buenas tardes, convocatoria disponible%0Ahttps://antoniocorser.github.io/Futbol-Tactix/inicio.html" target="_blank" id="whatsapp-icon">
+    <img src="imagenes/whats.png" alt="Compartir en WhatsApp">
+</a>
+
+<script>
+    function toggleImage(img) {
+        const allImages = img.parentNode.querySelectorAll('.player-img');
+        allImages.forEach(image => {
+            if (image !== img) {
+                image.style.display = 'none';
+            }
+        });
+        img.style.display = 'inline-block';
+    }
+
+    // Mostrar el botón de WhatsApp si el usuario es administrador
+    const urlParams = new URLSearchParams(window.location.search);
+    const user = urlParams.get('user');
+    if (user === 'admin') {
+        document.getElementById('whatsapp-icon').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
