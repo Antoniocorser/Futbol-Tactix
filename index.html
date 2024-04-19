@@ -112,20 +112,18 @@
 
         // Verificar las credenciales de inicio de sesión
         if (username === 'usuarioPadre' && password === 'contraseñaPadre') {
-            // Redireccionar a la página de convocatoria para usuario normal
-            redirectUrl = 'convocatoria.html?user=normal';
+        localStorage.setItem('isLoggedIn', 'true');
+        redirectUrl = 'convocatoria.html?user=normal';
         } else if (username === 'admin' && password === 'admin'){
-            // Redireccionar a la página de convocatoria para administrador
+            localStorage.setItem('isLoggedIn', 'true');
             redirectUrl = 'convocatoria.html?user=admin';
         } else {
             document.getElementById('error-message').style.display = 'block';
         }
-
         if (redirectUrl) {
             window.location.href = redirectUrl;
         }
     }
 </script>
-
 </body>
 </html>

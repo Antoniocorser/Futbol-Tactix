@@ -85,7 +85,7 @@
     /* Estilo para el botón de WhatsApp */
     #whatsapp-icon {
         display: none;
-        position: absolute;
+        position: fixed;
         bottom: 20px;
         right: 20px;
         z-index: 1000;
@@ -182,13 +182,20 @@
         img.style.display = 'inline-block';
     }
 
-    // Mostrar el botón de WhatsApp si el usuario es administrador
-    const urlParams = new URLSearchParams(window.location.search);
-    const user = urlParams.get('user');
-    if (user === 'admin') {
-        document.getElementById('whatsapp-icon').style.display = 'block';
+    // Verificar si el usuario ha iniciado sesión
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    if (!isLoggedIn || isLoggedIn !== 'true') {
+        // Si el usuario no ha iniciado sesión, redirigir a la página de inicio de sesión
+        window.location.href = 'index.html';
+    } else {
+        // Si el usuario ha iniciado sesión, se permite acceder a la página de convocatoria
+        // Puedes agregar cualquier otra lógica necesaria aquí
+        const urlParams = new URLSearchParams(window.location.search);
+        const user = urlParams.get('user');
+        if (user === 'admin') {
+            document.getElementById('whatsapp-icon').style.display = 'block'; // Mostrar el botón de WhatsApp si el usuario es administrador
+        }
     }
 </script>
-
 </body>
 </html>
