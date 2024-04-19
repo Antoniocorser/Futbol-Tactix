@@ -184,11 +184,16 @@
 
     // Verificar si el usuario ha iniciado sesión
     const isLoggedIn = localStorage.getItem('isLoggedIn');
+    var inicioSesion  = 'index.html';
+    console.log('isLoggedIn:', isLoggedIn);
     if (!isLoggedIn || isLoggedIn !== 'true') {
+        console.log('Redirigiendo a la página de inicio de sesión');
         // Si el usuario no ha iniciado sesión, redirigir a la página de inicio de sesión
-        window.location.replace('index.html');
+        window.location.href = inicioSesion;
     } else {
+        console.log('Usuario autenticado, permitiendo acceso a la convocatoria');
         // Si el usuario ha iniciado sesión, se permite acceder a la página de convocatoria
+        // Puedes agregar cualquier otra lógica necesaria aquí
         const urlParams = new URLSearchParams(window.location.search);
         const user = urlParams.get('user');
         if (user === 'admin') {
