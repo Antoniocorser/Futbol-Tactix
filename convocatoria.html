@@ -1,206 +1,327 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Convocatoria</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f9f9f9;
-        margin: 0;
-        padding: 0;
-        position: relative; /* Añadido para que el contenedor sea relativo */
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convocatoria</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            background-color: #f9f9f9; /* Fondo gris */
+        }
 
-    .container {
-        max-width: 800px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        position: relative;
-    }
-
-    h2 {
-        color: #333;
-        border-bottom: 1px solid #ccc;
-        padding-bottom: 10px;
-        margin-bottom: 20px;
-        text-align: center;
-    }
-
-    table {
-        border-collapse: collapse;
-        width: 100%;
-        margin-top: 20px;
-    }
-
-    th, td {
-        border: 1px solid #ddd;
-        padding: 10px;
-        text-align: center;
-    }
-
-    th {
-        background-color: #f2f2f2;
-    }
-
-    .player-img {
-        max-width: 50px;
-        max-height: 50px;
-        cursor: pointer;
-        display: block;
-        margin-bottom: 5px;
-        border-radius: 5px;
-        transition: transform 0.3s ease;
-    }
-
-    .player-img:hover {
-        transform: scale(1.1);
-    }
-
-    @media only screen and (max-width: 600px) {
         .container {
-            padding: 10px;
-            border-radius: 0;
-            box-shadow: none;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff; /* Fondo blanco */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        h2 {
+            color: #333;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            text-align: center;
         }
 
         table {
-            font-size: 14px;
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
         }
 
         th, td {
-            padding: 8px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
         }
 
         .player-img {
-            max-width: 40px;
-            max-height: 40px;
+            max-width: 50px;
+            max-height: 50px;
+            cursor: pointer;
+            display: block;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            transition: transform 0.3s ease;
         }
-    }
 
-    /* Estilo para el botón de WhatsApp */
-    #whatsapp-icon {
-        display: none;
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        z-index: 1000;
-    }
-    
-    #whatsapp-icon img {
-        width: 50px; /* Tamaño del icono */
-        height: auto;
-        border-radius: 50%;
-        border: 1px solid #25d366; /* Color del borde */
-        background-color: #25d366; /* Color de fondo */
-        padding: 5px;
-        transition: transform 0.3s ease;
-    }
+        .player-img:hover {
+            transform: scale(1.1);
+        }
 
-    #whatsapp-icon img:hover {
-        transform: scale(1.1);
-    }
-</style>
+        @media only screen and (max-width: 600px) {
+            .container {
+                padding: 20px;
+                border-radius: 0;
+                box-shadow: none;
+            }
+
+            table {
+                font-size: 14px;
+            }
+
+            th, td {
+                padding: 8px;
+            }
+
+            .player-img {
+                max-width: 40px;
+                max-height: 40px;
+            }
+
+            /* Fondo blanco en pantallas móviles */
+            body {
+                background-color: #fff;
+            }
+        }
+
+        /* Estilo para los botones */
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #whatsapp-icon {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        #whatsapp-icon button {
+            background-color: #25d366;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            padding: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        #whatsapp-icon button img {
+            width: 30px;
+            height: auto;
+        }
+
+        #whatsapp-icon button:hover {
+            transform: scale(1.1);
+        }
+
+        #reset-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #reset-button:hover {
+            background-color: #0056b3;
+        }
+
+        #lugar {
+            color: #007bff; /* Color del enlace */
+            text-decoration: none; /* Eliminar subrayado predeterminado */
+            transition: color 0.5s ease; /* Transición suave del color */
+            color: rgb(0, 0, 0);
+        }
+
+        #lugar:hover {
+            color: #418cdb; /* Cambiar el color al pasar el cursor sobre el enlace */
+        }
+    </style>
 </head>
+
 <body>
 
-<div class="container">
-    <h2>Información del Partido</h2>
-    <img src="imagenes/ubl.png" alt="Escudo" style="max-width: 100px; margin: 0 auto 20px; display: block;">
-    <p><strong>Fecha:</strong> 18 de abril de 2024</p>
-    <p><strong>Hora:</strong> 19:00</p>
-    <p><strong>Hora de Quedada:</strong> 17:30</p>
-    <p><strong>Lugar de Partido:</strong> <a href="https://www.google.com/maps/dir//C.+Salvador+Allende,+5,+41740+Lebrija,+Sevilla/@36.9160557,-6.1637688,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0xd0decc4d9c7d027:0x16de01e393086eb7!2m2!1d-6.0813678!2d36.9160842?entry=ttu">Estadio Municipal</a></p>
-    <p><strong>Equipación:</strong> Camiseta Roja, Pantalón Azul</p>
+    <div class="container">
+        <h2>Información del Partido</h2>
+        <img src="imagenes/ubl.png" alt="Escudo" style="max-width: 100px; margin: 0 auto 20px; display: block;">
+        <p><strong>Fecha:</strong> 18 de abril de 2024</p>
+        <p><strong>Hora:</strong> 19:00</p>
+        <p><strong>Hora de Quedada:</strong> <span id="hora-quedada" onclick="agregarRecordatorio()">17:30</span></p>
+        <p><strong>Lugar de Partido:</strong> <a href="https://www.google.com/maps/dir//C.+Salvador+Allende,+5,+41740+Lebrija,+Sevilla/@36.9160557,-6.1637688,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0xd0decc4d9c7d027:0x16de01e393086eb7!2m2!1d-6.0813678!2d36.9160842?entry=ttu" id="lugar">Estadio Municipal</a></p>
+        <p><strong>Equipación:</strong> Camiseta Roja, Pantalón Azul</p>
 
-    <h2>Tabla de Jugadores</h2>
+        <h2>Jugadoras</h2>
 
-    <table>
-        <tr>
-            <th>Jugadora</th>
-            <th>Dorsal</th>
-            <th>Convocada</th>
-        </tr>
-        <!-- Script para generar filas de tabla -->
-        <script>
-            const jugadores = [
-            { nombre: "CANTERO MAGRIZ, ALEJANDRA", dorsal: 10, imagenes: ["verde.jpg", "rojo.jpg"] },
-            { nombre: "CASTILLO MARTIN, MARIA", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
-            { nombre: "DALI DORANTES, NOELIA", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
-            { nombre: "FALCON CORDERO, VIRGINIA", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
-            { nombre: "FALCÓN GONZÁLEZ, ROSA", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
-            { nombre: "FERNÁNDEZ CORDERO, NURIA", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
-            { nombre: "FERNANDEZ MUÑOZ, DANIELA", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
-            { nombre: "GALAN MARIN, MARIA", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
-            { nombre: "GARCIA VILLALBA, CELESTE", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
-            { nombre: "GUISADO BORNES, DANIELA", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
-            { nombre: "MORENO BAUTISTA, MARIA DEL CARMEN", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
-            { nombre: "RODRIGUEZ GONZALEZ, CLAUDIA", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
-            { nombre: "RUIZ VARGA, JULIA", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
-            { nombre: "RUIZ VARGAS, ANA", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
-            { nombre: "TEJERO GONZALEZ, TERESA", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
-            { nombre: "TRUJILLO RODRIGUEZ, ANGELA ", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
-            { nombre: "VEGA RUIZ, ALICIA", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
-            { nombre: "VIDAL SANCHEZ, MARINA", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
-            { nombre: "ZAMBRANO PEREIRA, ROCIO", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"]},
-            ];
+        <table>
+            <tr>
+                <th>Jugadora</th>
+                <th>Dorsal</th>
+                <th>Convocada</th>
+            </tr>
+            <!-- Script para generar filas de tabla -->
+            <script>
+                const jugadores = [
+                    { nombre: "CANTERO MAGRIZ, ALEJANDRA", dorsal: 10, imagenes: ["verde.jpg", "rojo.jpg"] },
+                    { nombre: "CASTILLO MARTIN, MARIA", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"] },
+                    { nombre: "DALI DORANTES, NOELIA", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"] },
+                    { nombre: "FALCON CORDERO, VIRGINIA", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"] },
+                    { nombre: "FALCÓN GONZÁLEZ, ROSA", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"] },
+                    { nombre: "FERNÁNDEZ CORDERO, NURIA", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"] },
+                    { nombre: "FERNANDEZ MUÑOZ, DANIELA", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"] },
+                    { nombre: "GALAN MARIN, MARIA", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"] },
+                    { nombre: "GARCIA VILLALBA, CELESTE", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"] },
+                    { nombre: "GUISADO BORNES, DANIELA", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"] },
+                    { nombre: "MORENO BAUTISTA, MARIA DEL CARMEN", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"] },
+                    { nombre: "RODRIGUEZ GONZALEZ, CLAUDIA", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"] },
+                    { nombre: "RUIZ VARGA, JULIA", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"] },
+                    { nombre: "RUIZ VARGAS, ANA", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"] },
+                    { nombre: "TEJERO GONZALEZ, TERESA", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"] },
+                    { nombre: "TRUJILLO RODRIGUEZ, ANGELA ", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"] },
+                    { nombre: "VEGA RUIZ, ALICIA", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"] },
+                    { nombre: "VIDAL SANCHEZ, MARINA", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"] },
+                    { nombre: "ZAMBRANO PEREIRA, ROCIO", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"] },
+                ];
 
-            jugadores.forEach(jugador => {
-                document.write(`
-                    <tr>
-                        <td>${jugador.nombre}</td>
-                        <td>${jugador.dorsal}</td>
-                        <td>
-                            <img class="player-img" src="imagenes/${jugador.imagenes[0]}" alt="Imagen 1" onclick="toggleImage(this)">
-                            <img class="player-img" src="imagenes/${jugador.imagenes[1]}" alt="Imagen 2" onclick="toggleImage(this)">
-                        </td>
-                    </tr>
-                `);
+                jugadores.forEach(jugador => {
+                    document.write(`
+                        <tr>
+                            <td>${jugador.nombre}</td>
+                            <td>${jugador.dorsal}</td>
+                            <td>
+                                <img class="player-img" src="imagenes/${jugador.imagenes[0]}" alt="Imagen 1" onclick="toggleImage(this)">
+                                <img class="player-img" src="imagenes/${jugador.imagenes[1]}" alt="Imagen 2" onclick="toggleImage(this)">
+                            </td>
+                        </tr>
+                    `);
+                });
+
+                function agregarEventoCalendario() {
+                    const fechaPartido = new Date(document.querySelector("#fecha-partido").innerText);
+                    const horaQuedada = document.querySelector("#hora-quedada").innerText;
+
+                    fechaPartido.setHours(parseInt(horaQuedada.split(':')[0], 10)); // Establecer la hora de quedada en la fecha del partido
+                    fechaPartido.setMinutes(parseInt(horaQuedada.split(':')[1], 10));
+                    fechaPartido.setMinutes(fechaPartido.getMinutes() - 60); // Restar 60 minutos para obtener la hora de recordatorio
+
+                    const fechaQuedadaFormato = fechaPartido.toISOString().replace(/-|:|\.\d+/g, ''); // Formatear la fecha
+                    const descripcion = 'Hora de quedada para el partido de fútbol en 1h';
+                    const ubicacion = 'Estadio Municipal';
+
+                    const userAgent = navigator.userAgent.toLowerCase();
+                    if (userAgent.includes('android')) {
+                        agregarEventoAndroid(descripcion, fechaQuedadaFormato, ubicacion);
+                    } else if (userAgent.includes('iphone') || userAgent.includes('ipad') || userAgent.includes('ipod')) {
+                        agregarEventoiPhone(descripcion, fechaQuedadaFormato, ubicacion);
+                    } else {
+                        agregarEventoGoogle(descripcion, fechaQuedadaFormato, ubicacion);
+                    }
+                }
+
+                function agregarEventoAndroid(descripcion, fechaQuedadaFormato, ubicacion) {
+                    const enlace = `content://com.android.calendar/events?`
+                        + `title=${encodeURIComponent(descripcion)}`
+                        + `&eventTimezone=UTC`
+                        + `&dtstart=${fechaQuedadaFormato}`
+                        + `&dtend=${fechaQuedadaFormato}`
+                        + `&eventLocation=${encodeURIComponent(ubicacion)}`;
+                    window.location.href = enlace;
+                }
+
+                function agregarEventoiPhone(descripcion, fechaQuedadaFormato, ubicacion) {
+                    const enlace = `data:text/calendar;charset=utf8,`
+                        + `BEGIN:VCALENDAR\n`
+                        + `VERSION:2.0\n`
+                        + `BEGIN:VEVENT\n`
+                        + `DTSTART:${fechaQuedadaFormato}\n`
+                        + `DTEND:${fechaQuedadaFormato}\n`
+                        + `SUMMARY:${descripcion}\n`
+                        + `DESCRIPTION:${descripcion}\n`
+                        + `LOCATION:${ubicacion}\n`
+                        + `END:VEVENT\n`
+                        + `END:VCALENDAR\n`;
+                    const enlaceCodificado = encodeURI(enlace);
+                    window.location.href = enlaceCodificado;
+                }
+
+                function agregarEventoGoogle(descripcion, fechaQuedadaFormato, ubicacion) {
+                    const fechaInicio = fechaQuedadaFormato;
+                    const fechaFin = fechaQuedadaFormato;
+                    const enlace = `https://calendar.google.com/calendar/render?action=TEMPLATE`
+                        + `&text=${encodeURIComponent(descripcion)}`
+                        + `&dates=${fechaInicio}/${fechaFin}`
+                        + `&details=${encodeURIComponent(descripcion)}`
+                        + `&location=${encodeURIComponent(ubicacion)}`;
+                    window.open(enlace, '_blank');
+                }
+            </script>
+            <!-- Fin del script -->
+        </table>
+
+        <!-- Botones -->
+        <div class="button-container">
+            <!-- Botón de WhatsApp -->
+            <div id="whatsapp-icon">
+                <button onclick="compartirWhatsApp()">
+                    <img src="imagenes/whats.png" alt="Compartir en WhatsApp">
+                </button>
+            </div>
+
+            <!-- Botón de Reset -->
+            <button id="reset-button" onclick="resetearSeleccion()">Resetear Selección</button>
+        </div>
+
+    </div>
+
+    <script>
+
+        function toggleImage(img) {
+            const allImages = img.parentNode.querySelectorAll('.player-img');
+            allImages.forEach(image => {
+                if (image !== img) {
+                    image.style.display = 'none';
+                }
             });
-        </script>
-        <!-- Fin del script -->
-    </table>
-</div>
-
-<!-- Botón de WhatsApp -->
-<a href="https://api.whatsapp.com/send?text=Buenas tardes, convocatoria disponible%0Ahttps://antoniocorser.github.io/Futbol-Tactix/" target="_blank" id="whatsapp-icon">
-    <img src="imagenes/whats.png" alt="Compartir en WhatsApp">
-</a>
-
-<script>
-     window.location.hash = 'convocatoria';
-
-    function toggleImage(img) {
-        const allImages = img.parentNode.querySelectorAll('.player-img');
-        allImages.forEach(image => {
-            if (image !== img) {
-                image.style.display = 'none';
-            }
-        });
-        img.style.display = 'inline-block';
-    }
-
-    // Verificar si el usuario ha iniciado sesión
-    const isLoggedIn = localStorage.getItem('isLoggedIn');
-    var inicioSesion  = 'index.html';
-    console.log('isLoggedIn:', isLoggedIn);
-    if (!isLoggedIn || isLoggedIn !== 'true') {
-        console.log('Redirigiendo a la página de inicio de sesión');
-        // Si el usuario no ha iniciado sesión, redirigir a la página de inicio de sesión
-        window.location.href = inicioSesion;
-    } else {
-        console.log('Usuario autenticado, permitiendo acceso a la convocatoria');
-        // Si el usuario ha iniciado sesión, se permite acceder a la página de convocatoria
-        const urlParams = new URLSearchParams(window.location.search);
-        const user = urlParams.get('user');
-        if (user === 'admin') {
-            document.getElementById('whatsapp-icon').style.display = 'block'; // Mostrar el botón de WhatsApp si el usuario es administrador
+            img.style.display = 'inline-block';
         }
-    }
-</script>
+
+        // Función para compartir en WhatsApp
+        function compartirWhatsApp() {
+            const mensaje = encodeURIComponent("Buenas tardes, convocatoria disponible\nhttps://antoniocorser.github.io/Futbol-Tactix/");
+            const enlace = `https://api.whatsapp.com/send?text=${mensaje}`;
+            window.open(enlace, '_blank');
+        }
+
+        // Función para resetear selección
+        function resetearSeleccion() {
+            const imagenes = document.querySelectorAll('.player-img');
+            imagenes.forEach(img => {
+                img.style.display = 'block';
+            });
+        }
+
+        // Verificar si el usuario ha iniciado sesión y es administrador
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            const inicioSesion = 'index.html'; // URL de la página de inicio de sesión
+            if (!isLoggedIn || isLoggedIn !== 'true') {
+                // Si el usuario no ha iniciado sesión, redirigir a la página de inicio de sesión
+                window.location.href = inicioSesion;
+            } else {
+                // Si el usuario ha iniciado sesión, se permite acceder a la página de convocatoria
+                const urlParams = new URLSearchParams(window.location.search);
+                const user = urlParams.get('user');
+                if (user === 'admin') {
+                    // Mostrar los botones solo si el usuario es administrador
+                    document.querySelector('.button-container').style.display = 'block';
+                } else {
+                    // Ocultar los botones si el usuario no es administrador
+                    document.querySelector('.button-container').style.display = 'none';
+                }
+            }
+    </script>
 </body>
 </html>
