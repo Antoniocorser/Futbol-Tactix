@@ -144,13 +144,14 @@
     <div class="principal">
         <h2>Información del Partido</h2>
         <img src="imagenes/ubl.png" alt="Escudo" style="max-width: 100px; margin: 0 auto 20px; display: block;">
-        <p><strong>Fecha:</strong> <span id="fecha-partido">18 de abril de 2024</span></p>
-        <p><strong>Hora:</strong> 19:00</p>
-        <p><strong>Hora de Quedada:</strong> <span id="hora-quedada" onclick="agregarEventoCalendario()">17:30</span></p>
-        <p><strong>Lugar de Partido:</strong> <a href="https://www.google.com/maps/dir//C.+Salvador+Allende,+5,+41740+Lebrija,+Sevilla/@36.9160557,-6.1637688,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0xd0decc4d9c7d027:0x16de01e393086eb7!2m2!1d-6.0813678!2d36.9160842?entry=ttu" id="lugar">Estadio Municipal</a></p>
-        <p><strong>Equipación:</strong> Camiseta Roja, Pantalón Azul</p>
+        <p><strong>Fecha:</strong> <span id="fecha-partido" onclick="editarFechaPartido()">22 de abril de 2024</span></p>
+        <p><strong>Hora:</strong> <span id="hora-partido" onclick="editarHoraPartido()">19:00</span></p>
+        <p><strong>Hora de Quedada:</strong> <span id="hora-quedada" onclick="editarHoraQuedada()">17:30</span></p>
+        <p><strong>Lugar de Partido:</strong> <a id="lugar" href="https://www.google.com/maps/dir//C.+Salvador+Allende,+5,+41740+Lebrija,+Sevilla/@36.9160557,-6.1637688,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0xd0decc4d9c7d027:0x16de01e393086eb7!2m2!1d-6.0813678!2d36.9160842?entry=ttu">Estadio Municipal</a></p>
+        <p><strong>Equipación:</strong> <span id="equipacion" onclick="editarEquipacion()">Camiseta Roja, Pantalón Azul</span></p>
 
         <h2>Jugadoras</h2>
+
 
         <table>
             <tr>
@@ -198,7 +199,8 @@
 
                 function agregarEventoCalendario() {
                     try {
-                        const fechaPartido = new Date(document.querySelector("#fecha-partido").innerText);
+                        const fechaPartidoTexto = document.querySelector("#fecha-partido").innerText;
+                        const fechaPartido = convertirFechaTextoADate(fechaPartidoTexto);
                         const horaQuedada = document.querySelector("#hora-quedada").innerText;
 
                         fechaPartido.setHours(parseInt(horaQuedada.split(':')[0], 10)); // Establecer la hora de quedada en la fecha del partido
@@ -221,7 +223,34 @@
                             console.error('Error al agregar evento al calendario:', error);
                         }
                 }
-                
+
+                function convertirFechaTextoADate(fechaTexto) {
+                    const partesFecha = fechaTexto.split(' ');
+                    const dia = parseInt(partesFecha[0], 10);
+                    const mes = partesFecha[2]; // El mes está en texto
+                    const año = parseInt(partesFecha[4], 10);
+
+                    // Mapeo de nombres de meses a sus números correspondientes
+                    const meses = {
+                        "enero": 0,
+                        "febrero": 1,
+                        "marzo": 2,
+                        "abril": 3,
+                        "mayo": 4,
+                        "junio": 5,
+                        "julio": 6,
+                        "agosto": 7,
+                        "septiembre": 8,
+                        "octubre": 9,
+                        "noviembre": 10,
+                        "diciembre": 11
+                    };
+
+                    const mesNumero = meses[mes.toLowerCase()];
+
+                    // Crear objeto Date con los componentes de fecha
+                    return new Date(año, mesNumero - 1, dia);
+                }
 
                 function agregarEventoAndroid(descripcion, fechaQuedadaFormato, ubicacion) {
                     const enlace = `content://com.android.calendar/events?`
@@ -303,6 +332,145 @@
                 img.style.display = 'block';
             });
         }
+       // Función para editar la hora de quedada (solo visible para administradores)
+       function editarHoraQuedada() {
+            // Verificar si el usuario es administrador
+            if (user === 'admin') {
+                // Obtener el elemento span
+                const spanHoraQuedada = document.getElementById('hora-quedada');
+
+                // Crear un input de tipo texto
+                const inputHoraQuedada = document.createElement('input');
+                inputHoraQuedada.type = 'text';
+                inputHoraQuedada.value = spanHoraQuedada.innerText;
+
+                // Reemplazar el span con el input
+                spanHoraQuedada.parentNode.replaceChild(inputHoraQuedada, spanHoraQuedada);
+
+                // Enfocar el input
+                inputHoraQuedada.focus();
+
+                // Agregar evento para guardar los cambios al perder el foco
+                inputHoraQuedada.addEventListener('blur', function () {
+                    // Actualizar el span con el nuevo valor
+                    spanHoraQuedada.innerText = inputHoraQuedada.value;
+                    // Restaurar el span
+                    inputHoraQuedada.parentNode.replaceChild(spanHoraQuedada, inputHoraQuedada);
+                });
+            }
+        }
+
+        // Función para editar el lugar del partido (solo visible para administradores)
+        function editarLugar() {
+            // Verificar si el usuario es administrador
+            if (user === 'admin') {
+                // Obtener el elemento span
+                const spanLugar = document.getElementById('lugar');
+
+                // Crear un input de tipo texto
+                const inputLugar = document.createElement('input');
+                inputLugar.type = 'text';
+                inputLugar.value = spanLugar.innerText;
+
+                // Reemplazar el span con el input
+                spanLugar.parentNode.replaceChild(inputLugar, spanLugar);
+
+                // Enfocar el input
+                inputLugar.focus();
+
+                // Agregar evento para guardar los cambios al perder el foco
+                inputLugar.addEventListener('blur', function () {
+                    // Actualizar el span con el nuevo valor
+                    spanLugar.innerText = inputLugar.value;
+                    // Restaurar el span
+                    inputLugar.parentNode.replaceChild(spanLugar, inputLugar);
+                });
+            }
+        }
+
+        // Función para editar la fecha del partido (solo visible para administradores)
+        function editarFechaPartido() {
+            // Verificar si el usuario es administrador
+            if (user === 'admin') {
+                // Obtener el elemento span
+                const spanFechaPartido = document.getElementById('fecha-partido');
+
+                // Crear un input de tipo texto
+                const inputFechaPartido = document.createElement('input');
+                inputFechaPartido.type = 'string';
+                inputFechaPartido.value = spanFechaPartido.innerText;
+
+                // Reemplazar el span con el input
+                spanFechaPartido.parentNode.replaceChild(inputFechaPartido, spanFechaPartido);
+
+                // Enfocar el input
+                inputFechaPartido.focus();
+
+                // Agregar evento para guardar los cambios al perder el foco
+                inputFechaPartido.addEventListener('blur', function () {
+                    // Actualizar el span con el nuevo valor
+                    spanFechaPartido.innerText = inputFechaPartido.value;
+                    // Restaurar el span
+                    inputFechaPartido.parentNode.replaceChild(spanFechaPartido, inputFechaPartido);
+                });
+            }
+        }
+
+        // Función para editar la hora del partido (solo visible para administradores)
+        function editarHoraPartido() {
+            // Verificar si el usuario es administrador
+            if (user === 'admin') {
+                // Obtener el elemento span
+                const spanHoraPartido = document.getElementById('hora-partido');
+
+                // Crear un input de tipo texto
+                const inputHoraPartido = document.createElement('input');
+                inputHoraPartido.type = 'time';
+                inputHoraPartido.value = spanHoraPartido.innerText;
+
+                // Reemplazar el span con el input
+                spanHoraPartido.parentNode.replaceChild(inputHoraPartido, spanHoraPartido);
+
+                // Enfocar el input
+                inputHoraPartido.focus();
+
+                // Agregar evento para guardar los cambios al perder el foco
+                inputHoraPartido.addEventListener('blur', function () {
+                    // Actualizar el span con el nuevo valor
+                    spanHoraPartido.innerText = inputHoraPartido.value;
+                    // Restaurar el span
+                    inputHoraPartido.parentNode.replaceChild(spanHoraPartido, inputHoraPartido);
+                });
+            }
+        }
+
+        // Función para editar la equipación (solo visible para administradores)
+        function editarEquipacion() {
+            // Verificar si el usuario es administrador
+            if (user === 'admin') {
+                // Obtener el elemento span
+                const spanEquipacion = document.getElementById('equipacion');
+
+                // Crear un input de tipo texto
+                const inputEquipacion = document.createElement('input');
+                inputEquipacion.type = 'text';
+                inputEquipacion.value = spanEquipacion.innerText;
+
+                // Reemplazar el span con el input
+                spanEquipacion.parentNode.replaceChild(inputEquipacion, spanEquipacion);
+
+                // Enfocar el input
+                inputEquipacion.focus();
+
+                // Agregar evento para guardar los cambios al perder el foco
+                inputEquipacion.addEventListener('blur', function () {
+                    // Actualizar el span con el nuevo valor
+                    spanEquipacion.innerText = inputEquipacion.value;
+                    // Restaurar el span
+                    inputEquipacion.parentNode.replaceChild(spanEquipacion, inputEquipacion);
+                });
+            }
+        }
 
         // Verificar si el usuario ha iniciado sesión y es administrador
         const inicioSesion = 'index.html'; // URL de la página de inicio de sesión
@@ -311,16 +479,14 @@
         if (!(user === 'usuario' || user === 'admin')) {
             // Si "user" no es ni "usuario" ni "admin", redirigir a la página de inicio
             window.location.href = inicioSesion;
-        } else if (user === 'admin') {
-            // Mostrar los botones solo si el usuario es administrador
-            document.querySelector('.botones').style.display = 'block';
-        } else {
+        } else if (user === 'usuario') {
             // Ocultar los botones si el usuario no es administrador
             document.querySelector('.botones').style.display = 'none';
+            // Habilitar los enlaces para los usuarios normales
+            document.querySelectorAll('a').forEach(a => {
+                a.removeAttribute('onclick');
+            });
         }
-        
-        
     </script>
 </body>
-
 </html>
