@@ -8,20 +8,19 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
+            margin: 20px;
             padding: 0;
             position: relative;
-            background-color: #f9f9f9; /* Fondo gris */
+            background: linear-gradient(to bottom, #fff, #8edcff);
         }
 
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
+        .principal {
+            max-width: calc(100% - 40px);
+            margin: 0 auto;
             padding: 20px;
-            background-color: #fff; /* Fondo blanco */
+            background-color: #fff;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            position: relative;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         h2 {
@@ -49,12 +48,11 @@
         }
 
         .player-img {
-            max-width: 50px;
-            max-height: 50px;
+            max-width: 40px;
+            max-height: 40px;
             cursor: pointer;
             display: block;
-            margin-bottom: 5px;
-            border-radius: 5px;
+            margin: 0 auto;
             transition: transform 0.3s ease;
         }
 
@@ -62,34 +60,7 @@
             transform: scale(1.1);
         }
 
-        @media only screen and (max-width: 600px) {
-            .container {
-                padding: 20px;
-                border-radius: 0;
-                box-shadow: none;
-            }
-
-            table {
-                font-size: 14px;
-            }
-
-            th, td {
-                padding: 8px;
-            }
-
-            .player-img {
-                max-width: 40px;
-                max-height: 40px;
-            }
-
-            /* Fondo blanco en pantallas móviles */
-            body {
-                background-color: #fff;
-            }
-        }
-
-        /* Estilo para los botones */
-        .button-container {
+        .botones {
             text-align: center;
             margin-top: 20px;
         }
@@ -104,12 +75,12 @@
             color: #fff;
             border: none;
             border-radius: 50%;
-            padding: 5px;
+            padding: 8px;
             transition: transform 0.3s ease;
         }
 
         #whatsapp-icon button img {
-            width: 30px;
+            width: 24px;
             height: auto;
         }
 
@@ -117,7 +88,7 @@
             transform: scale(1.1);
         }
 
-        #reset-button {
+        #resetear {
             background-color: #007bff;
             color: #fff;
             border: none;
@@ -127,31 +98,55 @@
             transition: background-color 0.3s ease;
         }
 
-        #reset-button:hover {
+        #resetear:hover {
             background-color: #0056b3;
         }
 
         #lugar {
-            color: #007bff; /* Color del enlace */
-            text-decoration: none; /* Eliminar subrayado predeterminado */
-            transition: color 0.5s ease; /* Transición suave del color */
-            color: rgb(0, 0, 0);
+            color: #000000;
+            text-decoration: none;
+            transition: color 0.5s ease;
         }
 
         #lugar:hover {
-            color: #418cdb; /* Cambiar el color al pasar el cursor sobre el enlace */
+            color: #418cdb;
+        }
+
+        @media only screen and (max-width: 600px) {
+            body {
+                margin: 10px;
+            }
+
+            .principal {
+                border-radius: 0;
+                box-shadow: none;
+                padding: 15px;
+            }
+
+            table {
+                font-size: 14px;
+            }
+
+            th, td {
+                padding: 8px;
+            }
+
+            .player-img {
+                max-width: 30px;
+                max-height: 30px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="container">
+    <div class="principal">
         <h2>Información del Partido</h2>
         <img src="imagenes/ubl.png" alt="Escudo" style="max-width: 100px; margin: 0 auto 20px; display: block;">
-        <p><strong>Fecha:</strong> 18 de abril de 2024</p>
+        <p><strong>Fecha:</strong> <span id="fecha-partido">18 de abril de 2024</span></p>
         <p><strong>Hora:</strong> 19:00</p>
-        <p><strong>Hora de Quedada:</strong> <span id="hora-quedada" onclick="agregarRecordatorio()">17:30</span></p>
+        <p><strong>Hora de Quedada:</strong> <span id="hora-quedada" onclick="agregarEventoCalendario()">17:30</span></p>
         <p><strong>Lugar de Partido:</strong> <a href="https://www.google.com/maps/dir//C.+Salvador+Allende,+5,+41740+Lebrija,+Sevilla/@36.9160557,-6.1637688,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0xd0decc4d9c7d027:0x16de01e393086eb7!2m2!1d-6.0813678!2d36.9160842?entry=ttu" id="lugar">Estadio Municipal</a></p>
         <p><strong>Equipación:</strong> Camiseta Roja, Pantalón Azul</p>
 
@@ -186,7 +181,8 @@
                     { nombre: "VIDAL SANCHEZ, MARINA", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"] },
                     { nombre: "ZAMBRANO PEREIRA, ROCIO", dorsal: 7, imagenes: ["verde.jpg", "rojo.jpg"] },
                 ];
-
+                
+                /* Para cada jugadora añade el nombre, dorsal y botones */
                 jugadores.forEach(jugador => {
                     document.write(`
                         <tr>
@@ -201,26 +197,31 @@
                 });
 
                 function agregarEventoCalendario() {
-                    const fechaPartido = new Date(document.querySelector("#fecha-partido").innerText);
-                    const horaQuedada = document.querySelector("#hora-quedada").innerText;
+                    try {
+                        const fechaPartido = new Date(document.querySelector("#fecha-partido").innerText);
+                        const horaQuedada = document.querySelector("#hora-quedada").innerText;
 
-                    fechaPartido.setHours(parseInt(horaQuedada.split(':')[0], 10)); // Establecer la hora de quedada en la fecha del partido
-                    fechaPartido.setMinutes(parseInt(horaQuedada.split(':')[1], 10));
-                    fechaPartido.setMinutes(fechaPartido.getMinutes() - 60); // Restar 60 minutos para obtener la hora de recordatorio
+                        fechaPartido.setHours(parseInt(horaQuedada.split(':')[0], 10)); // Establecer la hora de quedada en la fecha del partido
+                        fechaPartido.setMinutes(parseInt(horaQuedada.split(':')[1], 10));
+                        fechaPartido.setMinutes(fechaPartido.getMinutes() - 60); // Restar 60 minutos para obtener la hora de recordatorio
 
-                    const fechaQuedadaFormato = fechaPartido.toISOString().replace(/-|:|\.\d+/g, ''); // Formatear la fecha
-                    const descripcion = 'Hora de quedada para el partido de fútbol en 1h';
-                    const ubicacion = 'Estadio Municipal';
+                        const fechaQuedadaFormato = fechaPartido.toISOString().replace(/-|:|\.\d+/g, ''); // Formatear la fecha
+                        const descripcion = 'Hora de quedada para el partido de fútbol en 1h';
+                        const ubicacion = 'Estadio Municipal';
 
-                    const userAgent = navigator.userAgent.toLowerCase();
-                    if (userAgent.includes('android')) {
-                        agregarEventoAndroid(descripcion, fechaQuedadaFormato, ubicacion);
-                    } else if (userAgent.includes('iphone') || userAgent.includes('ipad') || userAgent.includes('ipod')) {
-                        agregarEventoiPhone(descripcion, fechaQuedadaFormato, ubicacion);
-                    } else {
-                        agregarEventoGoogle(descripcion, fechaQuedadaFormato, ubicacion);
-                    }
+                        const userAgent = navigator.userAgent.toLowerCase();
+                        if (userAgent.includes('android')) {
+                            agregarEventoAndroid(descripcion, fechaQuedadaFormato, ubicacion);
+                        } else if (userAgent.includes('iphone') || userAgent.includes('ipad') || userAgent.includes('ipod')) {
+                            agregarEventoiPhone(descripcion, fechaQuedadaFormato, ubicacion);
+                        } else {
+                            agregarEventoGoogle(descripcion, fechaQuedadaFormato, ubicacion);
+                        }
+                    } catch (error) {
+                            console.error('Error al agregar evento al calendario:', error);
+                        }
                 }
+                
 
                 function agregarEventoAndroid(descripcion, fechaQuedadaFormato, ubicacion) {
                     const enlace = `content://com.android.calendar/events?`
@@ -245,7 +246,7 @@
                         + `END:VEVENT\n`
                         + `END:VCALENDAR\n`;
                     const enlaceCodificado = encodeURI(enlace);
-                    window.location.href = enlaceCodificado;
+                    window.location.href = enlaceCodificado; 
                 }
 
                 function agregarEventoGoogle(descripcion, fechaQuedadaFormato, ubicacion) {
@@ -259,11 +260,10 @@
                     window.open(enlace, '_blank');
                 }
             </script>
-            <!-- Fin del script -->
         </table>
 
         <!-- Botones -->
-        <div class="button-container">
+        <div class="botones">
             <!-- Botón de WhatsApp -->
             <div id="whatsapp-icon">
                 <button onclick="compartirWhatsApp()">
@@ -272,7 +272,7 @@
             </div>
 
             <!-- Botón de Reset -->
-            <button id="reset-button" onclick="resetearSeleccion()">Resetear Selección</button>
+            <button id="resetear" onclick="resetearSeleccion()">Resetear Selección</button>
         </div>
 
     </div>
@@ -305,23 +305,22 @@
         }
 
         // Verificar si el usuario ha iniciado sesión y es administrador
-            const isLoggedIn = localStorage.getItem('isLoggedIn');
-            const inicioSesion = 'index.html'; // URL de la página de inicio de sesión
-            if (!isLoggedIn || isLoggedIn !== 'true') {
-                // Si el usuario no ha iniciado sesión, redirigir a la página de inicio de sesión
-                window.location.href = inicioSesion;
-            } else {
-                // Si el usuario ha iniciado sesión, se permite acceder a la página de convocatoria
-                const urlParams = new URLSearchParams(window.location.search);
-                const user = urlParams.get('user');
-                if (user === 'admin') {
-                    // Mostrar los botones solo si el usuario es administrador
-                    document.querySelector('.button-container').style.display = 'block';
-                } else {
-                    // Ocultar los botones si el usuario no es administrador
-                    document.querySelector('.button-container').style.display = 'none';
-                }
-            }
+        const inicioSesion = 'index.html'; // URL de la página de inicio de sesión
+        const urlParams = new URLSearchParams(window.location.search);
+        const user = urlParams.get('user');
+        if (!(user === 'usuario' || user === 'admin')) {
+            // Si "user" no es ni "usuario" ni "admin", redirigir a la página de inicio
+            window.location.href = inicioSesion;
+        } else if (user === 'admin') {
+            // Mostrar los botones solo si el usuario es administrador
+            document.querySelector('.botones').style.display = 'block';
+        } else {
+            // Ocultar los botones si el usuario no es administrador
+            document.querySelector('.botones').style.display = 'none';
+        }
+        
+        
     </script>
 </body>
+
 </html>

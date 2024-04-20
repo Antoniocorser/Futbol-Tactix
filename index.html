@@ -7,13 +7,13 @@
 <style>
     body {
         font-family: Arial, sans-serif;
-        background-color: #f2f2f2;
         margin: 0;
         padding: 0;
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100vh;
+        background: linear-gradient(to bottom, #fff, #8edcff); /* Fondo degradado */
     }
 
     #login-form {
@@ -65,58 +65,49 @@
         margin-top: 10px;
     }
 
-    /* Estilo para el botón de WhatsApp */
-    #whatsapp-icon {
-        display: none;
-        position: absolute;
-        bottom: 20px;
-        right: 20px;
-        z-index: 1000;
-    }
-    
-    #whatsapp-icon img {
-        width: 50px; /* Tamaño del icono */
-        height: auto;
-        border-radius: 50%;
-        border: 1px solid #25d366; /* Color del borde */
-        background-color: #25d366; /* Color de fondo */
-        padding: 5px;
-        transition: transform 0.3s ease;
+    .icon-container {
+        width: 100%;
+        height: 50px; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
     }
 
-    #whatsapp-icon img:hover {
-        transform: scale(1.1);
+    .icon-container img {
+        width: 50px; 
+        height: auto; 
     }
-    
 </style>
 </head>
 <body>
 
 <div id="login-form">
     <h2>Iniciar Sesión</h2>
+    <div class="icon-container">
+        <img src="imagenes/ubl.png" alt="Escudo" />
+    </div>
     <form>
         <label for="username">Usuario:</label><br>
         <input type="text" id="username" name="username"><br>
         <label for="password">Contraseña:</label><br>
         <input type="password" id="password" name="password"><br><br>
+        <div class="error-message" id="error-message" style="display: none;">Usuario o contraseña incorrectos</div><br>
         <button type="button" onclick="iniciarSesion()">Iniciar Sesión</button>
-        <div class="error-message" id="error-message" style="display: none;">Usuario o contraseña incorrectos</div>
     </form>
 </div>
 
 <script>
-    window.location.hash = 'Inicio de sesión';
+    /*Función que comprueba los datos de inicio de sesión*/
     function iniciarSesion() {
             var username = document.getElementById('username').value;
             var password = document.getElementById('password').value;
             var redirectUrl = '';
 
             // Verificar las credenciales de inicio de sesión
-            if (username === 'usuarioPadre' && password === 'contraseñaPadre') {
-            localStorage.setItem('isLoggedIn', 'true');
+            if (username === 'usuario' && password === 'usuario') {
             redirectUrl = 'convocatoria.html?user=usuario';
             } else if (username === 'admin' && password === 'admin'){
-                localStorage.setItem('isLoggedIn', 'true');
                 redirectUrl = 'convocatoria.html?user=admin';
             } else {
                 document.getElementById('error-message').style.display = 'block';
