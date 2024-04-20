@@ -302,6 +302,9 @@
 
             <!-- Botón de Reset -->
             <button id="resetear" onclick="resetearSeleccion()">Resetear Selección</button>
+
+            <!-- Botón de Guardar y Salir (solo para administradores) -->
+            <button id="guardar-salir" onclick="guardarCambios()">Guardar y Salir</button>
         </div>
 
     </div>
@@ -332,6 +335,7 @@
                 img.style.display = 'block';
             });
         }
+        /*
        // Función para editar la hora de quedada (solo visible para administradores)
        function editarHoraQuedada() {
             // Verificar si el usuario es administrador
@@ -358,8 +362,8 @@
                     inputHoraQuedada.parentNode.replaceChild(spanHoraQuedada, inputHoraQuedada);
                 });
             }
-        }
-
+        }*/
+   
         // Función para editar el lugar del partido (solo visible para administradores)
         function editarLugar() {
             // Verificar si el usuario es administrador
@@ -479,13 +483,20 @@
         if (!(user === 'usuario' || user === 'admin')) {
             // Si "user" no es ni "usuario" ni "admin", redirigir a la página de inicio
             window.location.href = inicioSesion;
-        } else if (user === 'usuario') {
+        } else if (user === 'admin') {
+            // Mostrar los botones solo si el usuario es administrador
+            document.querySelector('.botones').style.display = 'block';
+        } else {
             // Ocultar los botones si el usuario no es administrador
             document.querySelector('.botones').style.display = 'none';
-            // Habilitar los enlaces para los usuarios normales
-            document.querySelectorAll('a').forEach(a => {
-                a.removeAttribute('onclick');
-            });
+        }   
+
+        // Función para guardar los cambios y salir (solo para administradores)
+        function guardarCambios() {
+            // Aquí se guardarían los cambios en la base de datos o en algún otro medio de almacenamiento
+            alert("Cambios guardados exitosamente.");
+            // Redirigir al administrador a la página de inicio
+            window.location.href = 'index.html';
         }
     </script>
 </body>
